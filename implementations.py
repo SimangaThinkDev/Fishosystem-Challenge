@@ -104,8 +104,31 @@ def shark_move():
         print("The shark has hit the boundaries")
 
 
+def  state():
+    fishlen = sharklen = 0
+    for row in fishosys:
+        for item in row:
+            if item == ">":
+                fishlen += 1
+            elif item == "#":
+                sharklen += 1
 
-while True:
+    if fishlen == 0:
+        print("All The fishes have been eaten")
+        time.sleep(2)
+        clear()
+        return False
+    elif sharklen == 0 :
+        clear()
+        print("All The Sharks have perished")
+        time.sleep(2)
+        clear()
+        return False
+    else:
+        return True
+
+
+while state():
     fishes = 0
     [fishes := fishes + 1 for row in fishosys for item in row if item == ">"]
     sharks = 0
