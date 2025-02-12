@@ -11,7 +11,7 @@ import random, time
 # except KeyboardInterrupt:
 #     print("Thank you!")
 
-fishosys = [[random.choices([" ", ">", "#"], [25, 2, 1])[0] for i in range(10)] for j in range(10)]
+fishosys = [[random.choices([" ", ">", "#"], [30, 2, 0.5])[0] for i in range(20)] for j in range(20)]
 
 def fish_noticer(fishosys = fishosys):
 
@@ -40,4 +40,5 @@ def space(fishosys = fishosys):
 
 
 if __name__ == "__main__":
-    print(fish_noticer())
+    # print(fish_noticer())
+    [print(row) for row in fishosys]

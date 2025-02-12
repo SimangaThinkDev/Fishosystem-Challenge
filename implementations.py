@@ -20,7 +20,7 @@ class bcolors:
 
 
 def fish_move():
-    time.sleep(3)
+    # time.sleep(3)
     clear()
     try:
         y, x = fish_noticer()
@@ -36,35 +36,76 @@ def fish_move():
         if move == "North":
             fishosys[x][y] = " "
             if fishosys[x-movesteps][y] == "#":
+                # time.sleep(1)
                 print("The fish fell into the hands of the shark")
+                # time.sleep(2)
+                switch_for_evasion = [0,1]
+                if random.choices(switch_for_evasion, [4,1])[0] == 1:
+                    print("The fish has evaded the attack")
+                    pass
+                fishosys[x-movesteps][y] = "#"
             else:
                 fishosys[x-movesteps][y] = ">"
         if move == "East":
             fishosys[x][y] = " "
             if fishosys[x][y+movesteps] == "#":
+                # time.sleep(1)
                 print("The fish fell into the hands of the shark")
+                # time.sleep(2)
+                switch_for_evasion = [0,1]
+                if random.choices(switch_for_evasion, [4,1])[0] == 1:
+                    print("The fish has evaded the attack")
+                    pass
+                fishosys[x][y+movesteps] = "#"
             else:
                 fishosys[x][y+movesteps] = ">"
         if move == "South":
             fishosys[x][y] = " "
             if fishosys[x+movesteps][y] == "#":
+                # time.sleep(1)
                 print("The fish fell into the hands of the shark")
+                # time.sleep(2)
+                switch_for_evasion = [0,1]
+                if random.choices(switch_for_evasion, [4,1])[0] == 1:
+                    print("The fish has evaded the shark")
+                    pass
+                fishosys[x+movesteps][y] = "#"
             else:
                 fishosys[x+movesteps][y] = ">"
         if move == "West":
             fishosys[x][y] = " "
             if fishosys[x][y-movesteps] == "#":
+                # time.sleep(1)         
                 print("The fish fell into the hands of the shark")
+                # time.sleep(2)
+                switch_for_evasion = [0,1]
+                if random.choices(switch_for_evasion, [4,1])[0] == 1:
+                    print("The fish has evaded the attack")
+                    pass
+                fishosys[x][y-movesteps] = "#"
             else:
                 fishosys[x][y-movesteps] = ">"
         print(bcolors.OKBLUE + f"The fish will now move {move} and {movesteps} steps" + bcolors.OKBLUE)
 
 
     except IndexError:
-        print("The fish has hit the boundaries")
+        choice = random.choices([">", " "], [1,2])
+        if choice[0] == " ":
+            print("The fish has hit the boundaries")
+        else:
+            spawn(">")
 
+def spawn(species):
+    idx_1 = random.randint(0, 19)
+    idx_2 = random.randint(0, 19)
+    print(idx_1, idx_2)
+    if species == ">":
+        if fishosys[idx_1][idx_2] != "#":
+            fishosys[idx_1][idx_2] = species
+    else:
+        fishosys[idx_1][idx_2] = species
 def shark_move():
-    time.sleep(3)
+    # time.sleep(3)
     clear()
     try:
         y, x = shark_noticer()
@@ -79,30 +120,61 @@ def shark_move():
         movesteps = random.choice(spaces_to_move)
         if move == "North":
             fishosys[x][y] = " "
-            if fishosys[x-movesteps][y] == "#":
+            if fishosys[x-movesteps][y] == ">":
+                # time.sleep(1)
                 print("The shark is having a feast")
+                switch_for_evasion = [0,1]
+                if random.choices(switch_for_evasion, [4,1])[0] == 1:
+                    print("The fish has evaded this attack")
+                    pass
+                fishosys[x-movesteps][y] = "#"
+            else:
                 fishosys[x-movesteps][y] = "#"
         if move == "East":
             fishosys[x][y] = " "
-            if fishosys[x][y+movesteps] == "#":
+            if fishosys[x][y+movesteps] == ">":
+                # time.sleep(1)
                 print("The shark is having a feast")
+                switch_for_evasion = [0,1]
+                if random.choices(switch_for_evasion, [4,1])[0] == 1:
+                    print("The fish has evaded this attack")
+                    pass
+                fishosys[x][y+movesteps] = "#"
+            else:
                 fishosys[x][y+movesteps] = "#"
         if move == "South":
             fishosys[x][y] = " "
-            if fishosys[x+movesteps][y] == "#":
+            if fishosys[x+movesteps][y] == ">":
+                # time.sleep(1)
                 print("The shark is having a feast")
+                switch_for_evasion = [0,1]
+                if random.choices(switch_for_evasion, [4,1])[0] == 1:
+                    print("The fish has evaded this attack")
+                    pass
+                fishosys[x+movesteps][y] = "#"
+            else:
                 fishosys[x+movesteps][y] = "#"
         if move == "West":
             fishosys[x][y] = " "
-            if fishosys[x][y-movesteps] == "#":
+            if fishosys[x][y-movesteps] == ">":
+                # time.sleep(1)
                 print("The shark is having a feast")
+                switch_for_evasion = [0,1]
+                if random.choices(switch_for_evasion, [4,1])[0] == 1:
+                    print("The fish has evaded this attack")
+                    pass
+                fishosys[x][y-movesteps] = "#"
+            else:
                 fishosys[x][y-movesteps] = "#"
         print(bcolors.OKBLUE + f"The shark will now move {move} and {movesteps} steps" + bcolors.OKBLUE)
 
 
     except IndexError:
-        print("The shark has hit the boundaries")
-
+        choice = random.choices(["#", " "], [1,2])
+        if choice[0] == " ":
+            print("The shark has hit the boundaries")
+        else:
+            spawn("#")
 
 def  state():
     fishlen = sharklen = 0
@@ -115,24 +187,28 @@ def  state():
 
     if fishlen == 0:
         print("All The fishes have been eaten")
-        time.sleep(2)
+        time.sleep(4)
         clear()
         return False
     elif sharklen == 0 :
         clear()
         print("All The Sharks have perished")
-        time.sleep(2)
+        time.sleep(4)
         clear()
         return False
     else:
         return True
 
+def evade():
+    pass
 
 while state():
     fishes = 0
     [fishes := fishes + 1 for row in fishosys for item in row if item == ">"]
     sharks = 0
     [sharks := sharks + 1 for row in fishosys for item in row if item == "#"]
+    # spawn(">")
+    time.sleep(0.5)
     fish_move()
     print(f"We currently have {fishes} fishes and {sharks} sharks")
     shark_move()
