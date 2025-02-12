@@ -207,8 +207,6 @@ while state():
     [fishes := fishes + 1 for row in fishosys for item in row if item == ">"]
     sharks = 0
     [sharks := sharks + 1 for row in fishosys for item in row if item == "#"]
-    # spawn(">")
-    time.sleep(0.5)
     fish_move()
     print(f"We currently have {fishes} fishes and {sharks} sharks")
     shark_move()
