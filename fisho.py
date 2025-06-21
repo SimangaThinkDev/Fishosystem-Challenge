@@ -5,18 +5,24 @@ fishosys = [[random.choices([" ", ">", "#"], [30, 2, 0.5])[0] for i in range(20)
 
 def fish_noticer(fishosys = fishosys):
 
+    fishes = []
     for y, row in enumerate(fishosys):
         for x, object in enumerate(row):
             if object == ">":
-                return x, y
+                fishes.append( (x, y) )
+    
+    return random.choice( fishes )
 
 
 def shark_noticer(fishosys = fishosys):
 
+    sharks = []
     for y, row in enumerate(fishosys):
         for x, object in enumerate(row):
             if object == "#":
-                return x, y
+                sharks.append((x, y))
+
+    return random.choice( sharks )
             
 def space(fishosys = fishosys):
 
@@ -24,7 +30,7 @@ def space(fishosys = fishosys):
         for x, object in enumerate(row):
             if object == " ":
                 return x, y
-
+            
 
 
 
