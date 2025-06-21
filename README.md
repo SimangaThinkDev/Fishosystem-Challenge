@@ -22,5 +22,6 @@
     - Fishes win if all the sharks ("#") are either eaten or starve, or whatever you want it to be!! (i.e., there are no sharks left).
 
 
-# Due
-    - Monday
+## Requirement
+- pip install pygame for audio
+- pip install secho, for debug logs(upcoming)
